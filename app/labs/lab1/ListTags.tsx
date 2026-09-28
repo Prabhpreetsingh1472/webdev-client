@@ -15,11 +15,11 @@ export default function ListTags() {
         <li>Serve and enjoy!</li>
       </ol>
       How to make banana bread:
-        <ol id="wd-your-favorite-recipe,">
-            <li>Smash some bananas and mix sugar oil and flour.</li>
-            <li>Pour the mixture into a pan and add Chocolate chips.</li>
-            <li>Bake in Oven</li>
-        </ol>
+      <ol id="wd-your-favorite-recipe">
+        <li>Smash some bananas and mix sugar oil and flour.</li>
+        <li>Pour the mixture into a pan and add Chocolate chips.</li>
+        <li>Bake in Oven</li>
+      </ol>
       <h5>Unordered List Tag</h5>
       My favorite books (in no particular order)
       <ul id="wd-my-books">
