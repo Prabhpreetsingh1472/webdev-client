@@ -6,16 +6,24 @@ export default function TOC() {
       <h3>Table of Contents</h3>
       <ul>
         <li>
-          <Link href="/labs/lab1">Home</Link>
+          <Link id="wd-home-link" href="/labs/lab1">
+            Home
+          </Link>
         </li>
         <li>
-          <Link href="/labs/lab1">Lab 1</Link>
+          <Link id="wd-lab1-link" href="/labs/lab1">
+            Lab 1
+          </Link>
         </li>
         <li>
-          <Link href="/labs/lab2">Lab 2</Link>
+          <Link id="wd-lab2-link" href="/labs/lab2">
+            Lab 2
+          </Link>
         </li>
         <li>
-          <Link href="/labs/lab3">Lab 3</Link>
+          <Link id="wd-lab3-link" href="/labs/lab3">
+            Lab 3
+          </Link>
         </li>
         <li>
           <Link id="wd-toc-book-link" href="/book/ch1">

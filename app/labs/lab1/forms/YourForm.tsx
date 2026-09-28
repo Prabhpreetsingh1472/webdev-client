@@ -14,13 +14,13 @@ export default function YourForm() {
       <label htmlFor="wd-your-full-name">Full name: </label>
       <input
         type="text"
-        placeholder="Jane Doe"
+        placeholder="Prabhpreet Singh"
         id="wd-your-full-name"
         title="Sample name - replace with your own"
       />
       <br />
       <label htmlFor="wd-your-username">Username: </label>
-      <input type="text" placeholder="jdoe" id="wd-your-username" />
+      <input type="text" placeholder="psingh" id="wd-your-username" />
       <br />
       <label htmlFor="wd-your-password">Password: </label>
       <input type="password" defaultValue="sample123" id="wd-your-password" />
@@ -32,7 +32,7 @@ export default function YourForm() {
         id="wd-your-bio"
         cols={30}
         rows={6}
-        defaultValue="SAMPLE BIO - Jane Doe is a sample student. Replace this text with a few sentences about yourself, your major, and what you hope to build this semester."
+        defaultValue="I am Prabhpreet and and studying Computer Science at Northeastern University."
       />
 
       <h5>Radio Buttons</h5>
