@@ -26,6 +26,16 @@ export default function TOC() {
           </Link>
         </li>
         <li>
+          <Link id="wd-lab4-link" href="/labs/lab4">
+            Lab 4
+          </Link>
+        </li>
+        <li>
+          <Link id="wd-lab5-link" href="/labs/lab5">
+            Lab 5
+          </Link>
+        </li>
+        <li>
           <Link id="wd-toc-book-link" href="/book/ch1">
             Chapter 1
           </Link>
@@ -34,6 +44,16 @@ export default function TOC() {
           <Link href="/" id="wd-kambaz-link">
             Kambaz
           </Link>
+        </li>
+        <li>
+          <a
+            id="wd-github"
+            href="https://github.com/Prabhpreetsingh1472/webdev-client"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
         </li>
       </ul>
       Prabhpreet Singh
