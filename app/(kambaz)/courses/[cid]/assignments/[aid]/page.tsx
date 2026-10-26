@@ -1,11 +1,13 @@
 import Link from "next/link";
+import * as db from "../../../../database";
 
 export default async function AssignmentEditor({
   params,
 }: {
   params: Promise<{ cid: string; aid: string }>;
 }) {
-  const { cid } = await params;
+  const { cid, aid } = await params;
+  const assignment = db.assignments.find((a) => a._id === aid);
   return (
     <div id="wd-assignments-editor" className="max-w-xl">
       <label htmlFor="wd-name" className="block font-medium">
@@ -13,9 +15,12 @@ export default async function AssignmentEditor({
       </label>
       <input
         id="wd-name"
-        defaultValue="A1 - ENV + HTML"
+        defaultValue={assignment?.title ?? ""}
         className="w-full rounded border  p-2"
       />
+      <p id="wd-assignment-id" className="text-sm text-neutral-600">
+        Assignment id: {aid}
+      </p>
 
       <label htmlFor="wd-description" className="block font-medium">
         Description
@@ -23,7 +28,7 @@ export default async function AssignmentEditor({
       <textarea
         id="wd-description"
         rows={4}
-        defaultValue="The assignment is available online Submit a link to the landing page of your Web application running on Vercel."
+        defaultValue={assignment?.description ?? ""}
         className="w-full rounded border  p-2"
       />
 
@@ -32,7 +37,7 @@ export default async function AssignmentEditor({
       </label>
       <input
         id="wd-points"
-        defaultValue={100}
+        defaultValue={assignment?.points ?? 100}
         className="w-full rounded border  p-2"
       />
 
@@ -108,7 +113,7 @@ export default async function AssignmentEditor({
       <input
         type="date"
         id="wd-due-date"
-        defaultValue="2024-05-13"
+        defaultValue={assignment?.due}
         className="w-full rounded border  p-2"
       />
 
@@ -118,7 +123,7 @@ export default async function AssignmentEditor({
       <input
         type="date"
         id="wd-available-from"
-        defaultValue="2024-05-06"
+        defaultValue={assignment?.available}
         className="w-full rounded border  p-2"
       />
 
@@ -128,7 +133,7 @@ export default async function AssignmentEditor({
       <input
         type="date"
         id="wd-available-until"
-        defaultValue="2024-05-13"
+        defaultValue={assignment?.due}
         className="w-full rounded border  p-2"
       />
 
