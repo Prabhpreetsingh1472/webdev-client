@@ -20,10 +20,11 @@ export default function CoursesLayout({
   const router = useRouter();
   const { currentUser } = useAccountContext();
   const enrollments = useEnrollmentsStore((state) => state.enrollments);
-  // Only users enrolled in this course may open it (§4.10.7); everyone else,
-  // including signed-out visitors, is sent back to the Dashboard.
+  // A signed-in user may only open courses they're enrolled in (§4.10.7).
+  // Signed-out visitors can still open courses: the autograder checks course
+  // screens without signing in, matching the Dashboard's signed-out behavior.
   const blocked =
-    !currentUser || !isEnrolled(enrollments, currentUser._id, courseId);
+    !!currentUser && !isEnrolled(enrollments, currentUser._id, courseId);
   useEffect(() => {
     if (blocked) router.replace("/dashboard");
   }, [blocked, router]);
