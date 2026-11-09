@@ -1,14 +1,18 @@
+"use client";
+import { useParams, useRouter } from "next/navigation";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
-import * as db from "../../../database";
+import { useAssignmentsStore } from "../../../store/assignmentsStore";
+import { useAccountContext } from "../../../account/AccountContext";
 
-export default async function Assignments({
-  params,
-}: {
-  params: Promise<{ cid: string }>;
-}) {
-  const { cid } = await params;
-  const assignments = db.assignments.filter(
+export default function Assignments() {
+  const { cid } = useParams();
+  const router = useRouter();
+  const { currentUser } = useAccountContext();
+  // Faculty can create/edit/delete; students only view. If nobody is signed
+  // in we allow editing, matching how the Dashboard behaves.
+  const canEdit = !currentUser || currentUser.role === "FACULTY";
+  const assignments = useAssignmentsStore((state) => state.assignments).filter(
     (assignment) => assignment.course === cid,
   );
   return (
@@ -22,22 +26,25 @@ export default async function Assignments({
             className="rounded border py-1.5 pr-3 pl-9 text-sm"
           />
         </div>
-        <div className="flex gap-2">
-          <button
-            id="wd-add-assignment-group"
-            type="button"
-            className="inline-flex items-center gap-1 rounded border px-3 py-1.5 text-sm"
-          >
-            <FaPlus /> Group
-          </button>
-          <button
-            id="wd-add-assignment"
-            type="button"
-            className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
-          >
-            <FaPlus /> Assignment
-          </button>
-        </div>
+        {canEdit && (
+          <div className="flex gap-2">
+            <button
+              id="wd-add-assignment-group"
+              type="button"
+              className="inline-flex items-center gap-1 rounded border px-3 py-1.5 text-sm"
+            >
+              <FaPlus /> Group
+            </button>
+            <button
+              id="wd-add-assignment"
+              type="button"
+              onClick={() => router.push(`/courses/${cid}/assignments/new`)}
+              className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
+            >
+              <FaPlus /> Assignment
+            </button>
+          </div>
+        )}
       </div>
       <h3
         id="wd-assignments-title"
@@ -52,10 +59,11 @@ export default async function Assignments({
         {assignments.map((assignment) => (
           <AssignmentItem
             key={assignment._id}
-            cid={cid}
+            cid={String(cid)}
             aid={assignment._id}
             title={assignment.title}
             details={`Multiple Modules | Not available until ${assignment.available} | Due ${assignment.due} | ${assignment.points} pts`}
+            canDelete={canEdit}
           />
         ))}
       </ul>
